@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="3.3"
+version="4.0"
 depends=("bash" "tar" "busybox")
 
 install() {

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+version="0.46.4"
+depends=("make" "gcc" "glibc" "tar" "ninja" "meson")
+
+install() {
+    rm -f pixman-$version.tar.gz
+    wget https://www.cairographics.org/releases/pixman-$version.tar.gz
+    rm -rf pixman/
+    mkdir -p pixman/
+    tar -xf pixman-$version.tar.gz -C pixman --strip-components=1
+    cd pixman/
+    mkdir build
+    cd build
+
+    meson setup --prefix=/usr --buildtype=release ..
+    ninja
+    ninja install
+}
+
+remove() {
+    cd pixman
+    ninja -C build uninstall
+}

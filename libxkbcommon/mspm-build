@@ -18,6 +18,7 @@ install() {
 	      --buildtype=release  \
 	      -D enable-docs=false
     ninja
+    ninja install
 }
 
 remove() {

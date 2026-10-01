@@ -1,7 +1,7 @@
 #!/bin/bash
 
 version="2.4.134"
-depends=("make" "gcc" "glibc" "tar")
+depends=("make" "gcc" "glibc" "tar" "xz-utils" "ninja" "meson" "xtrans" "libX11" "libXext" "libFS" "libICE" "libSM" "libXScrnSaver" "libXt" "libXmu" "libXpm" "libXaw" "libXfixes" "libXcomposite" "libXrender" "libXcursor" "libXdamage" "libfontenc" "libXfont2" "libXft" "libXi" "libXinerama" "libXrandr" "libXres" "libXtst" "libXv" "libXvMC" "libXxf86dga" "libXxf86vm" "libpciaccess" "libxkbfile" "libxshmfence" "libXpresent")
 
 install() {
     rm -f libdrm-$version.tar.xz

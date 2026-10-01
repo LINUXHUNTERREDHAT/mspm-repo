@@ -11,7 +11,7 @@ install() {
     mkdir -p $lib/
     tar -xf $lib-$version.tar.xz -C $lib --strip-components=1
     cd $lib/
-    meson setup --prefix=$XORG_PREFIX --buildtype=release build
+    meson setup --prefix=/usr --buildtype=release build
     ninja -C build
     ninja -C build install
 }

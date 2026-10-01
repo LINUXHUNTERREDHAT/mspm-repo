@@ -1,0 +1,26 @@
+#!/bin/bash
+
+version="1.13.2"
+depends=("make" "gcc" "glibc" "tar" "ninja" "meson" "xtrans" "libX11" "libXext" "libFS" "libICE" "libSM" "libXScrnSaver" "libXt" "libXmu" "libXpm" "libXaw" "libXfixes" "libXcomposite" "libXrender" "libXcursor" "libXdamage" "libfontenc" "libXfont2" "libXft" "libXi" "libXinerama" "libXrandr" "libXres" "libXtst" "libXv" "libXvMC" "libXxf86dga" "libXxf86vm" "libpciaccess" "libxkbfile" "libxshmfence" "libXpresent" "wayland" "wayland-protocols" "libxcb" "xkeyboard-config")
+
+install() {
+    rm -f libxkbcommon-$version.tar.gz
+    wget https://github.com/lfs-book/libxkbcommon/archive/v$version/libxkbcommon-$version.tar.gz
+    rm -rf libxkbcommon/
+    mkdir -p libxkbcommon/
+    tar -xf libxkbcommon-$version.tar.gz -C libxkbcommon --strip-components=1
+    cd libxkbcommon/
+    mkdir build
+    cd build
+
+	meson setup ..             \
+	      --prefix=/usr        \
+	      --buildtype=release  \
+	      -D enable-docs=false
+    ninja
+}
+
+remove() {
+    cd libxkbcommon
+    ninja -C build uninstall
+}

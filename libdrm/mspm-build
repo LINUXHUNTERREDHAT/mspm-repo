@@ -1,0 +1,28 @@
+#!/bin/bash
+
+version="2.4.134"
+depends=("make" "gcc" "glibc" "tar")
+
+install() {
+    rm -f libdrm-$version.tar.xz
+    wget https://dri.freedesktop.org/libdrm/libdrm-$version.tar.xz
+    rm -rf libdrm/
+    mkdir -p libdrm/
+    tar -xf libdrm-$version.tar.xz -C libdrm --strip-components=1
+    cd libdrm/
+    mkdir build
+    cd build
+
+    meson setup --prefix=$XORG_PREFIX \
+                --buildtype=release   \
+                -D udev=true          \
+                -D valgrind=disabled  \
+                ..
+    ninja
+    ninja install
+}
+
+remove() {
+    cd libdrm
+    ninja -C build uninstall
+}

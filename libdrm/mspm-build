@@ -13,7 +13,7 @@ install() {
     mkdir build
     cd build
 
-    meson setup --prefix=$XORG_PREFIX \
+    meson setup --prefix=/usr \
                 --buildtype=release   \
                 -D udev=true          \
                 -D valgrind=disabled  \

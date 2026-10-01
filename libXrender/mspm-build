@@ -1,7 +1,7 @@
 #!/bin/bash
 
 version="0.9.12"
-depends=("make" "gcc" "glibc" "tar" "fontconfig" "libxcb" "xz-utils")
+depends=("make" "gcc" "glibc" "tar" "fontconfig" "libxcb" "xz-utils" "libX11")
 lib="libXrender"
 
 install() {

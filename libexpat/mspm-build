@@ -1,14 +1,14 @@
 #!/bin/bash
 
-version="2.8.2"
+version="2.8.5"
 depends=("make" "gcc" "glibc" "tar")
 
 install() {
-    rm -f expat-2.8.2.tar.xz
-    wget https://github.com/libexpat/libexpat/releases/download/R_2_8_2/expat-2.8.2.tar.xz
+    rm -f expat-$version.tar.xz
+    wget https://github.com/libexpat/libexpat/releases/download/R_2_8_2/expat-$version.tar.xz
     rm -rf expat/
     mkdir -p expat/
-    tar -xf expat-2.8.2.tar.xz -C expat --strip-components=1
+    tar -xf expat-$version.tar.xz -C expat --strip-components=1
     cd expat/
     ./configure --prefix=/usr
     make

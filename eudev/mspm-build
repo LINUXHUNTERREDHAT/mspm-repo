@@ -10,7 +10,7 @@ install() {
     mkdir -p eudev/
     tar -xf v$version.tar.gz -C eudev --strip-components=1
     cd eudev/
-    ./autogen.sh
+    autoreconf -f -i -s
     ./configure --prefix=/usr --sysconfdir=/etc --sbindir=/sbin --bindir=/bin --disable-static
     make
     make install

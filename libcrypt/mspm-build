@@ -10,6 +10,7 @@ install() {
     mkdir -p libcrypt/
     tar -xf v$version.tar.gz -C libcrypt --strip-components=1
     cd libcrypt/
+    ./autogen.sh
     ./configure --prefix=/usr
     make
     make install

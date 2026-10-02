@@ -1,0 +1,29 @@
+#!/bin/bash
+
+version="3.2.15"
+depends=("make" "gcc" "glibc" "tar" "autoconf" "automake")
+
+install() {
+    rm -f v$version.tar.gz
+    wget https://github.com/eudev-project/eudev/archive/refs/tags/v$version.tar.gz
+    rm -rf eudev/
+    mkdir -p eudev/
+    tar -xf v$version.tar.gz -C eudev --strip-components=1
+    cd eudev/
+    ./autogen.sh
+    ./configure --prefix=/usr --sysconfdir=/etc --sbindir=/sbin --bindir=/bin --disable-static
+    make
+    make install
+    cd ..
+    rm -f service
+    wget -O service https://raw.githubusercontent.com/Nick-cpp/npl-init-services/main/eudev/eudev
+    mkdir -p /etc/npl-init/sv/
+    cp service /etc/npl-init/sv/eudev
+    chmod +x /etc/npl-init/sv/eudev
+}
+
+remove() {
+    cd eudev/
+    make uninstall
+    rm -f /etc/npl-init/sv/eudev
+}

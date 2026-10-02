@@ -10,7 +10,7 @@ install() {
     mkdir -p doas/
     tar -xf v$version.tar.gz -C doas --strip-components=1
     cd doas/
-    ./configure --prefix=/usr --with-timestamp
+    ./configure --prefix=/usr --with-timestamp --without-pam
     make
     make install
 }

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+version="6.8.2"
+depends=("make" "gcc" "glibc" "tar")
+
+install() {
+    rm -f v$version.tar.gz
+    wget https://github.com/Duncaen/OpenDoas/archive/refs/tags/v$version.tar.gz
+    rm -rf doas/
+    mkdir -p doas/
+    tar -xf v$version.tar.gz -C doas --strip-components=1
+    cd doas/
+    ./configure --prefix=/usr --with-timestamp
+    make
+    make install
+}
+
+remove() {
+    cd doas/
+    make uninstall
+}

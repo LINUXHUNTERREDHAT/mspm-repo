@@ -1,0 +1,21 @@
+#!/bin/bash
+
+version="1.1.7"
+depends=("make" "gcc" "glibc" "tar")
+
+install() {
+    rm -f mtdev-$version.tar.bz2
+    wget https://bitmath.org/code/mtdev/mtdev-$version.tar.bz2
+    rm -rf mtdev/
+    mkdir -p mtdev/
+    tar -xf mtdev-$version.tar.bz2 -C mtdev --strip-components=1
+    cd mtdev/
+    ./configure --prefix=/usr --disable-static
+    make
+    make install
+}
+
+remove() {
+    cd mtdev/
+    make uninstall
+}

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+version="1.13.6"
+depends=("make" "gcc" "glibc" "tar" "xz-utils")
+
+install() {
+    rm -f libevdev-$version.tar.xz
+    wget https://www.freedesktop.org/software/libevdev/libevdev-$version.tar.xz
+    rm -rf libevdev/
+    mkdir -p libevdev/
+    tar -xf libevdev-$version.tar.xz -C libevdev --strip-components=1
+    cd libevdev/
+	mkdir build
+	cd build
+	
+	meson setup ..                  \
+	      --prefix=/usr             \
+	      --buildtype=release       \
+	      -D documentation=disabled \
+	      -D tests=disabled
+	ninja
+    ninja install
+}
+
+remove() {
+    cd libevdev/
+    ninja -C build uninstall
+}

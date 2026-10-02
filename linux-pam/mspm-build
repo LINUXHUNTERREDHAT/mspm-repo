@@ -1,0 +1,21 @@
+#!/bin/bash
+
+version="1.7.3"
+depends=("make" "gcc" "glibc" "tar" "libcrypt" "ninja" "meson")
+
+install() {
+    rm -f v$version.tar.gz
+    wget https://github.com/linux-pam/linux-pam/archive/refs/tags/v$version.tar.gz
+    rm -rf pam/
+    mkdir -p pam/
+    tar -xf v$version.tar.gz -C pam --strip-components=1
+    cd pam/
+    meson setup --prefix=/usr --buildtype=release build
+    ninja -C build
+    ninja -C build install
+}
+
+remove() {
+    cd pam/
+    ninja -C build uninstall
+}

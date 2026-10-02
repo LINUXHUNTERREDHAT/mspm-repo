@@ -1,0 +1,21 @@
+#!/bin/bash
+
+version="4.5.2"
+depends=("make" "gcc" "glibc" "tar" "autoconf" "automake")
+
+install() {
+    rm -f v$version.tar.gz
+    wget https://github.com/besser82/libxcrypt/archive/refs/tags/v$version.tar.gz
+    rm -rf libcrypt/
+    mkdir -p libcrypt/
+    tar -xf v$version.tar.gz -C libcrypt --strip-components=1
+    cd libcrypt/
+    ./configure --prefix=/usr
+    make
+    make install
+}
+
+remove() {
+    cd libcrypt/
+    make uninstall
+}

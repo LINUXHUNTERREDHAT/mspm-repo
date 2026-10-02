@@ -13,6 +13,11 @@ install() {
     ./configure --prefix=/usr --with-timestamp
     make
     make install
+	cat << 'EOF' > /etc/pam.d/doas
+auth     required    pam_unix.so
+account  required    pam_unix.so
+session  required    pam_unix.so
+EOF
 }
 
 remove() {

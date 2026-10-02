@@ -1,7 +1,7 @@
 #!/bin/bash
 
 version="6.8.2"
-depends=("make" "gcc" "glibc" "tar" "libcrypt" "linuxpam")
+depends=("make" "gcc" "glibc" "tar" "libcrypt" "linux-pam")
 
 install() {
     rm -f v$version.tar.gz
